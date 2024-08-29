@@ -33,8 +33,8 @@ export default function RootLayout({
           strategy='lazyOnload'
         >
           {`window.sn_meta = window.sn_meta || {
-    "app_id": "fd7ff2b4-31bc-4087-ab52-d137bd4d3037",
-    "app_signature": "0cec6085-2dce-4db3-92a4-80aeec81be7e",
+    "app_id": "3a888a53-7361-4e91-b237-77d262ea3eac",
+    "app_signature": "29a0e4aa-77c7-4a32-a091-8f5f31674bab",
     "app_worker_path": ".././synt-worker-script.js",
     "app_version": "v1.0.1",
     "platform": "media",
