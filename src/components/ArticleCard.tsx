@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from './ui/button';
 import Image from 'next/image';
+import PaymentModal from './PaymentModal';
 
 export interface ArticleCardProps {
   article: any;
@@ -41,7 +41,7 @@ export default function ArticleCard(props: ArticleCardProps) {
         <p className='pt-4'>{article.abstract}</p>
       </CardContent>
       <CardFooter>
-        <Button variant='secondary'>Continue Reading</Button>
+        <PaymentModal/>
       </CardFooter>
     </Card>
   );
