@@ -5,12 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function PaymentSuccessfullPage() {
   const router = useRouter();
-  const isPaymentRunning =
-    localStorage.getItem('payment-in-progress') === 'true';
-  if (isPaymentRunning) {
-    localStorage.setItem('paid', 'true');
-    localStorage.removeItem('payment-in-progress');
-  }
   return (
     <div className='container text-center'>
       <h1 className='my-5'>Payment Successful!</h1>

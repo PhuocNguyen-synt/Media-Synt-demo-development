@@ -5,17 +5,15 @@ import { useRouter } from 'next/navigation';
 
 export default function PaymentModal() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const paymentLink = 'https://buy.stripe.com/test_5kA6rebizco4cCcbII';
+  const paymentLink = 'https://buy.stripe.com/test_6oE8zmdqH2NueKk7st';
   const router = useRouter();
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const payWithStripe = () => {
-    localStorage.setItem('payment-in-progress', 'true');
     window.location.href = paymentLink;
   };
 
   const payWithSynt = () => {
-    localStorage.setItem('payment-in-progress', 'true');
     router.push('/internal-payment');
   };
 
