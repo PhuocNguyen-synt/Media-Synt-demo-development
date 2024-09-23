@@ -28,7 +28,7 @@ export default function InternalPaymentPage() {
         <Button
           className='px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-200'
           onClick={() => {
-            localStorage.setItem('paid', 'true');
+          //  localStorage.setItem('paid', 'true');
             router.push('/payment-successful');
           }}
         >

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -8,10 +8,18 @@ import { CalendarDaysIcon } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Detail() {
-  let currentArticle = JSON.parse(
-    localStorage?.getItem('currentArticle') || '{}'
-  );
-  let img = localStorage?.getItem('imgURL') || '{}';
+  // let currentArticle = JSON.parse(
+  //   localStorage?.getItem('currentArticle') || '{}'
+  // );
+  // let img = localStorage?.getItem('imgURL') || '{}';
+  // let currentArticle;
+  // let img;
+  const [currentArticle,setCurrentArticle] = useState({title:'',abstract:'',url:'',byline:'',created_date:''})
+  const [img,setImg] = useState('')
+  useEffect(() => {
+    (typeof window !== 'undefined' && window.localStorage) && setCurrentArticle(JSON.parse(window?.localStorage?.getItem('currentArticle') || '{}'));
+    (typeof window !== 'undefined' && window.localStorage) && setImg(window?.localStorage?.getItem('imgURL') || '{}');
+  },[])
   const { title, abstract, url, byline, created_date } = currentArticle;
 
   return (

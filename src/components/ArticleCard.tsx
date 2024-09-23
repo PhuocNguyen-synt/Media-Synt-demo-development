@@ -19,7 +19,7 @@ export interface ArticleCardProps {
 export default function ArticleCard(props: ArticleCardProps) {
   const router = useRouter();
   const { article } = props;
-  const isPaid = localStorage.getItem('paid') === 'true';
+  const isPaid = (typeof window !== 'undefined' && window.localStorage) && window?.localStorage?.getItem('paid') === 'true';
   let imgURL: any;
   if (article.multimedia) {
     for (let i = 0; i < article.multimedia.length; i++) {
@@ -29,9 +29,9 @@ export default function ArticleCard(props: ArticleCardProps) {
     }
   }
 
-  const handleItemClick = (urlArticle?: any) => {
-    localStorage.setItem('currentArticle', JSON.stringify(article));
-    localStorage.setItem('imgURL', imgURL);
+  const handleItemClick = () => {
+    (typeof window !== 'undefined' && window.localStorage) && window?.localStorage?.setItem('currentArticle', JSON.stringify(article));
+    (typeof window !== 'undefined' && window.localStorage) &&window?.localStorage?.setItem('imgURL', imgURL);
     router.push(`/${article.section}/${article.title}`);
   };
   return (
