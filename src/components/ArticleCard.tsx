@@ -1,3 +1,4 @@
+'use client';
 import {
   Card,
   CardContent,
@@ -8,15 +9,18 @@ import {
 } from '@/components/ui/card';
 import Image from 'next/image';
 import PaymentModal from './PaymentModal';
+import { useRouter } from 'next/navigation';
 
 export interface ArticleCardProps {
-  article: any;
+  article?: any;
   key?: number;
 }
 
 export default function ArticleCard(props: ArticleCardProps) {
+  const router = useRouter();
   const { article } = props;
-  let imgURL;
+  const isPaid = localStorage.getItem('paid') === 'true';
+  let imgURL: any;
   if (article.multimedia) {
     for (let i = 0; i < article.multimedia.length; i++) {
       if (i === 1) {
@@ -24,6 +28,12 @@ export default function ArticleCard(props: ArticleCardProps) {
       }
     }
   }
+
+  const handleItemClick = (urlArticle?: any) => {
+    localStorage.setItem('currentArticle', JSON.stringify(article));
+    localStorage.setItem('imgURL', imgURL);
+    router.push(`/${article.section}/${article.title}`);
+  };
   return (
     <Card>
       <CardHeader>
@@ -41,7 +51,18 @@ export default function ArticleCard(props: ArticleCardProps) {
         <p className='pt-4'>{article.abstract}</p>
       </CardContent>
       <CardFooter>
-        <PaymentModal/>
+        {isPaid ? (
+          <>
+            <button
+              className='px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-200'
+              onClick={handleItemClick}
+            >
+              Read more
+            </button>
+          </>
+        ) : (
+          <PaymentModal />
+        )}
       </CardFooter>
     </Card>
   );
