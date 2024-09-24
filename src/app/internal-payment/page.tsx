@@ -29,7 +29,8 @@ export default function InternalPaymentPage() {
           className='px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-200'
           onClick={() => {
           (typeof window !== 'undefined' && window.localStorage) &&  localStorage.setItem('paid', 'true');
-            router.push('/payment-successful');
+            //router.push('/payment-successful');
+            window.location.href = '/payment-successful';
           }}
         >
           Pay
