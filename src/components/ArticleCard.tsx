@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Image from 'next/image';
-import PaymentModal from './PaymentModal';
 import { useRouter } from 'next/navigation';
+import PaymentModal from './PaymentModal';
 
 export interface ArticleCardProps {
   article?: any;
@@ -19,7 +19,10 @@ export interface ArticleCardProps {
 export default function ArticleCard(props: ArticleCardProps) {
   const router = useRouter();
   const { article } = props;
-  const isPaid = (typeof window !== 'undefined' && window.localStorage) && window?.localStorage?.getItem('paid') === 'true';
+  const isPaid =
+    typeof window !== 'undefined' &&
+    window.localStorage &&
+    window?.localStorage?.getItem('paid') === 'true';
   let imgURL: any;
   if (article.multimedia) {
     for (let i = 0; i < article.multimedia.length; i++) {
@@ -30,9 +33,13 @@ export default function ArticleCard(props: ArticleCardProps) {
   }
 
   const handleItemClick = () => {
-    (typeof window !== 'undefined' && window.localStorage) && window?.localStorage?.setItem('currentArticle', JSON.stringify(article));
-    (typeof window !== 'undefined' && window.localStorage) &&window?.localStorage?.setItem('imgURL', imgURL);
-    router.push(`/${article.section}/${article.title}`);
+    typeof window !== 'undefined' &&
+      window.localStorage &&
+      window?.localStorage?.setItem('currentArticle', JSON.stringify(article));
+    typeof window !== 'undefined' &&
+      window.localStorage &&
+      window?.localStorage?.setItem('imgURL', imgURL);
+    window.location.href = `/${article.section}/${article.title}`;
   };
   return (
     <Card>
