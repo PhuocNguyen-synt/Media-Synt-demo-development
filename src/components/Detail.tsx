@@ -6,15 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { CalendarDaysIcon } from 'lucide-react';
 import Image from 'next/image';
-import MetaTags from 'react-meta-tags';
 
 export default function Detail() {
-  // let currentArticle = JSON.parse(
-  //   localStorage?.getItem('currentArticle') || '{}'
-  // );
-  // let img = localStorage?.getItem('imgURL') || '{}';
-  // let currentArticle;
-  // let img;
   const [currentArticle,setCurrentArticle] = useState({title:'',abstract:'',url:'',byline:'',created_date:''})
   const [img,setImg] = useState('')
   useEffect(() => {
@@ -25,14 +18,6 @@ export default function Detail() {
 
   return (
     <>
-    <MetaTags>
-        <title>{title}</title>
-        <meta name="description" content={abstract} />
-        <meta property="og:type" content='article' />
-        <meta property="og:title" content={title} />
-        <meta property="og:image" content={img} />
-        <meta property="article:published_time" content={created_date && new Date(created_date).toISOString()} />
-      </MetaTags>
     <Card className='max-w-4xl mx-auto my-8 p-4'>
       <CardHeader>
         <CardTitle className='text-3xl font-bold'>{title}</CardTitle>
