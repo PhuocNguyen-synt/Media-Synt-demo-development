@@ -34,7 +34,7 @@ export default function RootLayout({
         >
           {`window.sn_meta = window.sn_meta || {
     "app_id": "3a888a53-7361-4e91-b237-77d262ea3eac",
-    "app_signature": "29a0e4aa-77c7-4a32-a091-8f5f31674bab",
+    "app_signature": "4a36560f-7871-4a15-b853-6e4be518a876",
     "app_worker_path": ".././synt-worker-script.js",
     "app_version": "v1.0.1",
     "platform": "media",
