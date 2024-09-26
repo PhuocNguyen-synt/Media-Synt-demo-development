@@ -8,7 +8,16 @@ import { CalendarDaysIcon } from 'lucide-react';
 import Image from 'next/image';
 import MetaTags from 'react-meta-tags';
 
-export default function Detail() {
+type Props = {
+  params?: { 
+    title: string 
+    abstract: string
+    imgUrl: string
+    byline: string
+    created_date: string
+  };
+}
+export default function Detail( { params }: Props) {
   const [currentArticle,setCurrentArticle] = useState({title:'',abstract:'',url:'',byline:'',created_date:''})
   const [img,setImg] = useState('')
   useEffect(() => {
@@ -21,28 +30,28 @@ export default function Detail() {
     <>
     <MetaTags>
         <title>{title}</title>
-        <meta name="description" content={abstract} />
+        <meta name="description" content={abstract || params?.abstract} />
         <meta property="og:type" content='article' />
-        <meta property="og:title" content={title} />
-        <meta property="og:image" content={img} />
-        <meta property="article:published_time" content={created_date && new Date(created_date).toISOString()} />
+        <meta property="og:title" content={title || params?.title} />
+        <meta property="og:image" content={img || params?.imgUrl} />
+        <meta property="article:published_time" content={(created_date && new Date(created_date).toISOString()) || params?.created_date} />
       </MetaTags>
     <Card className='max-w-4xl mx-auto my-8 p-4'>
       <CardHeader>
-        <CardTitle className='text-3xl font-bold'>{title}</CardTitle>
+        <CardTitle className='text-3xl font-bold'>{title || params?.title}</CardTitle>
       </CardHeader>
 
       <CardContent className='mt-2'>
         <div className='flex items-center justify-between text-gray-600'>
           <div className='flex items-center space-x-2'>
             <CalendarDaysIcon className='w-5 h-5' />
-            <p className='text-sm'>{created_date}</p>
+            <p className='text-sm'>{(created_date && new Date(created_date).toLocaleDateString()) || params?.created_date}</p>
           </div>
           <div className='flex items-center space-x-2'>
             <Avatar>
               <AvatarImage src='/path-to-reporter-avatar.jpg' alt='Reporter' />
             </Avatar>
-            <p className='text-sm'>Reported by {byline}</p>
+            <p className='text-sm'>Reported by {byline || params?.byline}</p>
           </div>
         </div>
 
@@ -56,7 +65,7 @@ export default function Detail() {
           className='rounded-lg mb-4 w-full'
         />
 
-        <p className='text-lg mb-4'>{abstract}</p>
+        <p className='text-lg mb-4'>{abstract || params?.abstract}</p>
 
         <div className='flex space-x-2 mt-4'>
           <Badge variant='outline' className='text-sm'>
