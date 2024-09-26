@@ -22,7 +22,7 @@ export default function RootLayout({
       <head>
         <Script
           type='module'
-          src='https://prod-cdn.synt.com/synt-opt-in-script.js'
+          src='https://dev-cdn.synt.com/synt-opt-in-script.js'
           async
           defer
           strategy='lazyOnload'
