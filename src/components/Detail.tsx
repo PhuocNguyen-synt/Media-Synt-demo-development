@@ -13,13 +13,19 @@ type Props = {
     title: string 
     abstract: string
     imgUrl: string
-    byline: string
-    created_date: string
+    author: string
+    date: string
+    newsUrl: string
   };
 }
 export default function Detail( { params }: Props) {
   const [currentArticle,setCurrentArticle] = useState({title:'',abstract:'',url:'',byline:'',created_date:''})
   const [img,setImg] = useState('')
+  useEffect(() => {
+    if (params) {
+      (typeof window !== 'undefined' && window.localStorage) && window.localStorage.removeItem('currentArticle');
+    }
+  },[params])
   useEffect(() => {
     (typeof window !== 'undefined' && window.localStorage) && setCurrentArticle(JSON.parse(window?.localStorage?.getItem('currentArticle') || '{}'));
     (typeof window !== 'undefined' && window.localStorage) && setImg(window?.localStorage?.getItem('imgURL') || '{}');
@@ -34,7 +40,7 @@ export default function Detail( { params }: Props) {
         <meta property="og:type" content='article' />
         <meta property="og:title" content={title || params?.title} />
         <meta property="og:image" content={img || params?.imgUrl} />
-        <meta property="article:published_time" content={(created_date && new Date(created_date).toISOString()) || params?.created_date} />
+        <meta property="article:published_time" content={(created_date && new Date(created_date).toISOString()) || params?.date} />
       </MetaTags>
     <Card className='max-w-4xl mx-auto my-8 p-4'>
       <CardHeader>
@@ -45,20 +51,20 @@ export default function Detail( { params }: Props) {
         <div className='flex items-center justify-between text-gray-600'>
           <div className='flex items-center space-x-2'>
             <CalendarDaysIcon className='w-5 h-5' />
-            <p className='text-sm'>{(created_date && new Date(created_date).toLocaleDateString()) || params?.created_date}</p>
+            <p className='text-sm'>{(created_date && new Date(created_date).toLocaleDateString()) || params?.date}</p>
           </div>
           <div className='flex items-center space-x-2'>
             <Avatar>
               <AvatarImage src='/path-to-reporter-avatar.jpg' alt='Reporter' />
             </Avatar>
-            <p className='text-sm'>Reported by {byline || params?.byline}</p>
+            <p className='text-sm'>Reported by {byline || params?.author}</p>
           </div>
         </div>
 
         <Separator className='my-4' />
 
         <Image
-          src={img}
+          src={ params?.imgUrl || img }
           alt='Main Image'
           width={380}
           height={180}
@@ -69,7 +75,7 @@ export default function Detail( { params }: Props) {
 
         <div className='flex space-x-2 mt-4'>
           <Badge variant='outline' className='text-sm'>
-            {url}
+            {url || params?.newsUrl}
           </Badge>
         </div>
       </CardContent>
