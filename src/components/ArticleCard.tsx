@@ -39,7 +39,8 @@ export default function ArticleCard(props: ArticleCardProps) {
     typeof window !== 'undefined' &&
       window.localStorage &&
       window?.localStorage?.setItem('imgURL', imgURL);
-    window.location.href = `/${article.section}/${article.title}`;
+    //window.location.href = `/${article.section}/${article.title}`;
+    router.push(`/${article.section}/${article.title}`);
   };
   return (
     <Card>
